@@ -1,0 +1,28 @@
+language: cpp
+compiler:
+  - gcc
+  - clang
+  
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-6
+      - g++-6
+      - cmake
+packages:
+  - clang-5
+before_script:
+  - mkdir ../build
+  - cd ../build
+script:
+  # Export CC and CXX to tell cmake which compiler to use
+  - export CC=/usr/bin/gcc-6
+  - export CXX=/usr/bin/g++-6
+  
+  - cmake ../LabT
+  - make -j
+  - ./test/Mp12_Text
+notifications:
+  email: false
